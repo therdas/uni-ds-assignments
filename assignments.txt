@@ -1,0 +1,32 @@
+1. a. Implementation of undirected unweighted graph using Adjacency Matrix.
+   b. Implementation of undirected weighted graph using Adjacency Matrix.
+   c. Implementation of directed unweighted graph using Adjacency Matrix.
+   d. Implementation of directed weighted graph using Adjacency Matrix.
+
+
+2. a. Implementation of undirected unweighted graph using Incidence Matrix.
+   b. Implementation of undirected weighted graph using Incidence Matrix.
+   c. Implementation of directed unweighted graph using Incidence Matrix.
+   d. Implementation of directed weighted graph using Incidence Matrix.
+
+3. a. Implementation of undirected unweighted graph using Adjacency List.
+   b. Implementation of undirected weighted graph using Adjacency List.
+   c. Implementation of directed unweighted graph using Adjacency List.
+   d. Implementation of directed weighted graph using Adjacency List.
+
+
+
+4. a. Consider an undirected graph, do DFS on it, and compute the DFS tree.
+   b. Consider a directed graph, do DFS on it, and compute the DFS tree.
+   c. Compute the number of components of a given undirected graph using DFS.
+   d. Consider an undirected graph. Do DFS on it and differentiate its edges 
+      based on your sequence of visiting the vertices.
+   e. Consider a directed graph. Do DFS on it and differentiate its edges based 
+      on your sequence of visiting the vertices.
+
+5. a. Consider an undirected graph, do BFS on it, and compute the BFS tree.
+   b. Consider a directed graph, do BFS on it, and compute the BFS tree.
+   c. Do BFS for computing the shortest distance and the path between a pair
+      of vertices of an undirected graph, if one exists.
+   d. Do BFS for computing the shortest distance and the path between a pair 
+      of vertices of a directed graph, if one exists.
