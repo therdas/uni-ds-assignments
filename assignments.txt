@@ -30,3 +30,20 @@
       of vertices of an undirected graph, if one exists.
    d. Do BFS for computing the shortest distance and the path between a pair 
       of vertices of a directed graph, if one exists.
+
+
+
+6. Devise a scheme in computing a polynomial 'C' where 'C' is computed by:
+   a. Adding two polynomials A and B
+   b. Subtracting polynomial B from A
+   c. Multiplying two polynomials A and B
+   d. Differentiating polynomial A
+
+7. Devise a scheme to represent a sparse matrix X and transpose this represntation of X in lexicographic order.
+
+8. Implement Assignment(6) using dynamic data structure as follows:
+   Devise a scheme in computing a polynomial 'C' where 'C' is computed by:
+   a. Adding two polynomials A and B
+   b. Subtracting polynomial B from A
+   c. Multiplying two polynomials A and B
+   d. Differentiating polynomial A
