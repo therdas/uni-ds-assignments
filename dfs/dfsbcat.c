@@ -36,6 +36,7 @@ bool dfs(dgraph g, int current, bool *visited, edge *tree, dfsnos *dn) {
             tree[tree[0].x].x = current;
             tree[tree[0].x].y = t->val;
             tree[0].x = tree[0].x + 1;
+            printf("Going from %d to %d\n", current, t->val);
             dfs(g, t->val, visited, tree, dn);
         }
         t = t->next;
@@ -46,6 +47,12 @@ bool dfs(dgraph g, int current, bool *visited, edge *tree, dfsnos *dn) {
     return true;
 }
 
+bool checkIfInTree(edge t[], int x, int y) {
+    for(int i = 1; i <= t[0].x; ++i)
+        if(t[i].x == x && t[i].y == y)
+            return true;
+    return false;
+}
 void computeDFS(dgraph g) {
     bool *visited = makeFalsyArray(g.order);
 
@@ -61,18 +68,29 @@ void computeDFS(dgraph g) {
     for(int i = 0; i < g.order; ++i)
         dfs(g, i, visited, tree, dn);
 
-    printf("The DFS tree is as follows: \n");
-    for(int i = 1; i <= tree[0].x; ++i)
-        printf("{%d, %d}, ", tree[i].x, tree[i].y);
-    printf("\b\b  \n\n");
+    for(int i = 1; i < tree[0].x; ++i)
+        printf("{%d, %d} is a tree edge.\n", tree[i].x, tree[i].y);
+    
+    
 
-    printf("The DFS numbers are: \n");
-    printf("+------+------+-----------------+\n");
-    printf("|Vertex| DFS# | DFS Completion# |\n");
-    printf("+------+------+-----------------+\n");
-    for(int i = 0; i < g.order; ++i)
-        printf("| %4d | %4d | %15d |\n", i, dn[i + 1].dfsn, dn[i + 1].dfscn);
-    printf("+------+------+-----------------+\n");
+    for(int i = 0; i < g.order; ++i) {
+        
+        list *adj_i = getAdjList(&g, i);
+        node *t = adj_i->head;
+        while(t) {
+            if(!checkIfInTree(tree, i, t->val)) {
+                int start = i + 1, end = t->val + 1;
+                if(dn[start].dfsn < dn[end].dfsn && dn[start].dfscn > dn[end].dfscn)
+                    printf("{%d, %d} is a forward edge.\n", start - 1, end - 1);
+                else if(dn[start].dfsn > dn[end].dfsn && dn[start].dfscn < dn[end].dfscn)
+                    printf("{%d, %d} is a back edge.\n", start - 1, end - 1);
+                else
+                    printf("{%d, %d} is a cross edge.\n", start - 1, end - 1);
+            }
+            t = t->next;
+        }
+    }
+
 }
 
 int main(int argc, char **argv) {

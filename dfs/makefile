@@ -2,7 +2,7 @@ libraries := graph
 headers := graph/include
 CPPFLAGS = -I $(headers)
 
-.PHONY: clean $(libraries) components.o
+.PHONY: clean $(libraries) components.o dfsacat.o dfsbcat.o
 
 dfsa: dfsa.o $(libraries)
 	gcc -o dfsa dfsa.o graph/graph.o graph/list.o $(CPPFLAGS)
@@ -22,11 +22,17 @@ components: components.o $(libraries)
 components.o:
 	gcc -c components.c $(CPPFLAGS)
 
-edgeCat: edgeCat.o $(libraries)
-	gcc -o edgeCat edgeCat.o graph/graph.o graph/list.o $(CPPFLAGS)
+dfsacat: dfsacat.o $(libraries)
+	gcc -o dfsacat dfsacat.o graph/graph.o graph/list.o $(CPPFLAGS)
 
-edgeCat.o:
-	gcc -c edgeCat.c $(CPPFLAGS)
+dfsacat.o:
+	gcc -c dfsacat.c $(CPPFLAGS)
+
+dfsbcat: dfsbcat.o $(libraries)
+	gcc -o dfsbcat dfsbcat.o graph/dgraph.o graph/list.o $(CPPFLAGS)
+
+dfsbcat.o:
+	gcc -c dfsbcat.c $(CPPFLAGS)
 
 $(libraries):
 	$(MAKE) --directory=$@ 

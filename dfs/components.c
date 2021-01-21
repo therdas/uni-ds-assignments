@@ -20,7 +20,10 @@ bool* makeFalsyArray(int size) {
     return a;
 }
 
-void dfs(graph g, int current, bool *visited) {
+bool dfs(graph g, int current, bool *visited) {
+    if(visited[current] == true)
+        return false;
+    
     visited[current] = true;
 
     list *adj = getAdjList(&g, current);
@@ -31,6 +34,8 @@ void dfs(graph g, int current, bool *visited) {
         }
         t = t->next;
     }
+
+    return true;
 }
 
 int countComponents(graph g) {
@@ -40,17 +45,8 @@ int countComponents(graph g) {
     int doFrom = 0;
     bool someComponentLeft = false;
 
-    do {
-        dfs(g, doFrom, visited);
-        ++components;
-        someComponentLeft = false;
-        for(int i = 0; i < g.order; ++i){
-            if(!visited[i]){
-                someComponentLeft = true;
-                doFrom = i;
-            }
-        }
-    } while(someComponentLeft);
+    for(int i = 0; i < g.order; ++i)
+        components += dfs(g, i, visited) ? 1 : 0;
 
     return components;
 }

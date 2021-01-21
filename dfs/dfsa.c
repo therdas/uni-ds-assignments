@@ -20,11 +20,14 @@ bool* makeFalsyArray(int size) {
     return a;
 }
 
-void dfs(graph g, int current, bool *visited, edge *tree, dfsnos *dn) {
+bool dfs(graph g, int current, bool *visited, edge *tree, dfsnos *dn) {
+    if(visited[current] == true)
+        return false;
+
     printf("Visited vertex %d\n", current);
 
     visited[current] = true;
-    dn[current].dfsn = tree[0].x;
+    dn[current + 1].dfsn = dn[0].dfsn++;
 
     list *adj = getAdjList(&g, current);
     node *t = adj->head;
@@ -38,24 +41,25 @@ void dfs(graph g, int current, bool *visited, edge *tree, dfsnos *dn) {
         t = t->next;
     }
 
-    dn[current].dfscn = tree[0].y;
-    tree[0].y = tree[0].y + 1;
+    dn[current + 1].dfscn = dn[0].dfscn++;
+
+    return true;
 }
 
-void computeDFS(graph g, int start) {
+void computeDFS(graph g) {
     bool *visited = makeFalsyArray(g.order);
-
-    if(!checkBounds(g, start, 0)) return;
 
     int edgeCount = countEdges(g);
 
-    edge *tree = (edge *) calloc(edgeCount + 1, sizeof(edge)); //First element stores the DFS# of the current element
-    dfsnos *dn = (dfsnos *) calloc(g.order, sizeof(dfsnos));
+    edge *tree = (edge *) calloc(edgeCount + 1, sizeof(edge)); //First element stores the edge no of the current element
+    dfsnos *dn = (dfsnos *) calloc(g.order + 1, sizeof(dfsnos));//First element stores DFS# and DFSC#
 
-    tree[0].x = 1; //DFS#
-    tree[0].y = 1; //DFSC#
+    tree[0].x = 1; //Tree edge no
+    dn[0].dfsn = 1; //DFSC#
+    dn[0].dfscn = 1;
 
-    dfs(g, start, visited, tree, dn);
+    for(int i = 0; i < g.order; ++i)
+        dfs(g, i, visited, tree, dn);
 
     printf("The DFS tree is as follows: \n");
     for(int i = 1; i <= tree[0].x; ++i)
@@ -67,7 +71,7 @@ void computeDFS(graph g, int start) {
     printf("|Vertex| DFS# | DFS Completion# |\n");
     printf("+------+------+-----------------+\n");
     for(int i = 0; i < g.order; ++i)
-        printf("| %4d | %4d | %15d |\n", i, dn[i].dfsn, dn[i].dfscn);
+        printf("| %4d | %4d | %15d |\n", i, dn[i + 1].dfsn, dn[i + 1].dfscn);
     printf("+------+------+-----------------+\n");
 }
 
@@ -94,5 +98,5 @@ int main(int argc, char **argv) {
         addEdge(&g, s, e);
     }
     printGraph(g);
-    computeDFS(g, 0);
+    computeDFS(g);
 }

@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
-#include<dgraph.h>
+#include<graph.h>
 
 typedef struct {
     int x;
@@ -20,7 +20,7 @@ bool* makeFalsyArray(int size) {
     return a;
 }
 
-bool dfs(dgraph g, int current, bool *visited, edge *tree, dfsnos *dn) {
+bool dfs(graph g, int current, bool *visited, edge *tree, dfsnos *dn) {
     if(visited[current] == true)
         return false;
 
@@ -46,7 +46,13 @@ bool dfs(dgraph g, int current, bool *visited, edge *tree, dfsnos *dn) {
     return true;
 }
 
-void computeDFS(dgraph g) {
+bool checkIfInTree(edge t[], int x, int y) {
+    for(int i = 1; i <= t[0].x; ++i)
+        if(t[i].x == x && t[i].y == y)
+            return true;
+    return false;
+}
+void computeDFS(graph g) {
     bool *visited = makeFalsyArray(g.order);
 
     int edgeCount = countEdges(g);
@@ -61,18 +67,28 @@ void computeDFS(dgraph g) {
     for(int i = 0; i < g.order; ++i)
         dfs(g, i, visited, tree, dn);
 
-    printf("The DFS tree is as follows: \n");
     for(int i = 1; i <= tree[0].x; ++i)
-        printf("{%d, %d}, ", tree[i].x, tree[i].y);
-    printf("\b\b  \n\n");
+        printf("{%d, %d} is a tree edge.\n", tree[i].x, tree[i].y);
+    
+    
 
-    printf("The DFS numbers are: \n");
-    printf("+------+------+-----------------+\n");
-    printf("|Vertex| DFS# | DFS Completion# |\n");
-    printf("+------+------+-----------------+\n");
-    for(int i = 0; i < g.order; ++i)
-        printf("| %4d | %4d | %15d |\n", i, dn[i + 1].dfsn, dn[i + 1].dfscn);
-    printf("+------+------+-----------------+\n");
+    for(int i = 0; i < g.order; ++i) {
+        
+        list *adj_i = getAdjList(&g, i);
+        node *t = adj_i->head;
+        while(t) {
+            if(!checkIfInTree(tree, i, t->val)) {
+                int start = i + 1, end = t->val + 1;
+                if(dn[start].dfsn < dn[end].dfsn && dn[start].dfscn > dn[end].dfscn)
+                    printf("{%d, %d} is a forward edge.\n", start - 1, end - 1);
+                else
+                    printf("{%d, %d} is a back edge.\n", start - 1, end - 1);
+               
+            }
+            t = t->next;
+        }
+    }
+
 }
 
 int main(int argc, char **argv) {
@@ -84,7 +100,7 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    dgraph g = createGraph(order);
+    graph g = createGraph(order);
 
     printf("Enter the edges of the graph, and -1 to stop inputting edges:\n");
     printGraph(g);

@@ -27,6 +27,7 @@ bool checkBounds(dgraph g, int start, int end) {
 void addEdge(dgraph *g, int start, int end) {
     if(!checkBounds(*g, start, end))
         return;
+    printf("ADDED TO GRAPH EDGE %d %d\n", start, end);
     addToList(&g->vertices[start], end);
 }
 
