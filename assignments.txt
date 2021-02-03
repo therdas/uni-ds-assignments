@@ -33,17 +33,28 @@
 
 
 
-6. Devise a scheme in computing a polynomial 'C' where 'C' is computed by:
-   a. Adding two polynomials A and B
-   b. Subtracting polynomial B from A
-   c. Multiplying two polynomials A and B
-   d. Differentiating polynomial A
+6. Devise a scheme in computing a polynomial 'C' where 'C' is computed by: ✔
+   a. Adding two polynomials A and B ✔
+   b. Subtracting polynomial B from A ✔
+   c. Multiplying two polynomials A and B ✔
+   d. Differentiating polynomial A ✔
 
-7. Devise a scheme to represent a sparse matrix X and transpose this represntation of X in lexicographic order.
+7. Devise a scheme to represent a sparse matrix X and transpose this 
+   representation of X in lexicographic order. ✔
 
-8. Implement Assignment(6) using dynamic data structure as follows:
+
+8. Implement Assignment(6) using dynamic data structure as follows: ✔
    Devise a scheme in computing a polynomial 'C' where 'C' is computed by:
-   a. Adding two polynomials A and B
-   b. Subtracting polynomial B from A
-   c. Multiplying two polynomials A and B
-   d. Differentiating polynomial A
+   a. Adding two polynomials A and B ✔
+   b. Subtracting polynomial B from A ✔
+   c. Multiplying two polynomials A and B ✔
+   d. Differentiating polynomial A ✔
+
+
+9. Consider a sequence of n elements and construct an AVL tree after insertion
+   of each element into the tree. Also perform deletion of elements from the
+   AVL tree, and rebuild the AVL tree as needed.
+
+10. Consider a sequence of n elements and construct a 2-3 tree after insertion
+    of each element into the tree. Also, perform deletion of elements from the
+    tree, and rebuild the 2-3 tree as needed.
