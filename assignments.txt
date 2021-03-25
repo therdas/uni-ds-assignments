@@ -53,8 +53,12 @@
 
 9. Consider a sequence of n elements and construct an AVL tree after insertion
    of each element into the tree. Also perform deletion of elements from the
-   AVL tree, and rebuild the AVL tree as needed.
+   AVL tree, and rebuild the AVL tree as needed. ✔
 
 10. Consider a sequence of n elements and construct a 2-3 tree after insertion
     of each element into the tree. Also, perform deletion of elements from the
     tree, and rebuild the 2-3 tree as needed.
+
+11. Implement Heapsort ✔
+
+12. Implement GraphSort
