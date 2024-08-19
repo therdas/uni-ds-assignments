@@ -1,3 +1,2 @@
-# uni-ds-assignments
-University DS Assignments
-I _Will_ know if you plagiarized these, so please Don't
+# University Data Structure Assignments
+Written in C. Feel free to take a gander - If you can't figure out what the code is for, I'd recommend looking at [Assignments](assignments.md)
